@@ -1,4 +1,11 @@
-'use client';
+/**
+ * A React component that renders a doughnut chart to display bank account data.
+ *
+ * @param {DoughnutChartProps} props - The props for the DoughnutChart component.
+ * @param {number[]} props.accounts - An array of account balances for each bank.
+ * @returns {JSX.Element} - A React component that renders the doughnut chart.
+ */
+"use client";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
@@ -10,16 +17,17 @@ const DoughnutChart = ({ accounts }: DoughnutChartProps) => {
       {
         label: "Banks",
         data: [1250, 2500, 3750, 4000],
-        backgroundColor: ["#0747b6","#2265d8", "#2f91fa", "#ffc107"],
+        backgroundColor: ["#0747b6", "#2265d8", "#2f91fa", "#ffc107"],
       },
     ],
     labels: ["Bank 1", "Bank 2", "Bank 3", "Bank 4"],
   };
 
-  return <Doughnut 
-  data={data} 
-  options={{
-    cutout:'60%',
+  return (
+    <Doughnut
+      data={data}
+      options={{
+        cutout: "60%",
         responsive: true,
         plugins: {
           legend: {
@@ -30,8 +38,9 @@ const DoughnutChart = ({ accounts }: DoughnutChartProps) => {
             text: "Banks Accounts",
           },
         },
-      }}        
-  />;
-}
+      }}
+    />
+  );
+};
 
 export default DoughnutChart;
