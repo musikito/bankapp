@@ -58,12 +58,12 @@ const AuthForm = ({ type }: { type: string }) => {
             }
 
             if (type === 'sign-in') {
-                const response = await signIn({
-                    email: data.email,
-                    pssword: data.password,
-                });
+                // const response = await signIn({
+                //     email: data.email,
+                //     pssword: data.password,
+                // });
 
-                if (response) router.push("/");
+                // if (response) router.push("/");
             }
 
 
@@ -73,7 +73,7 @@ const AuthForm = ({ type }: { type: string }) => {
         } finally {
             setIsLoading(false);
         }
-    }
+  }; // End of onSubmit
 
 
     return (
