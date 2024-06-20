@@ -1,9 +1,11 @@
 import HeaderBox from '@/components/HeaderBox'
 import RightSideBar from '@/components/RightSideBar';
 import TotalBalanceBox from '@/components/TotalBalanceBox';
+import { getLoggedInUser } from '@/lib/actions/user.actions';
 import React from 'react'
 
-const Home = () => {
+const Home = async () => {
+  // const loggedIn = await getLoggedInUser();
 
   const loggedIn = { firstName: 'JoseMiguel', lastName: "Marte", email: "tumusicalatina@gmail.com" };
   return (

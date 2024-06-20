@@ -20,8 +20,9 @@ import { Input } from "@/components/ui/input"
 import CustomInput from './CustomInput';
 import { authFormSchema } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { signIn, signUp } from '@/lib/actions/user.actions';
+import { redirect, useRouter } from 'next/navigation';
+import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions';
+import { Console, log } from 'console';
 
 const AuthForm = ({ type }: { type: string }) => {
     // UseRouter to redirect to the home page.
@@ -43,36 +44,38 @@ const AuthForm = ({ type }: { type: string }) => {
         },
     });
 
-    const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
+   
 
-        setIsLoading(true);
+    try {
+      // Sign Up with Appwrite & create plaid token
+      if (type === "sign-up") {
+        // Get user info from data
+        const newUser = await signUp(data);
 
-        try {
-            // Sign Up with Appwrite & create plaid token
-            if (type === 'sign-up') {
-                // Get user info from data
-                const newUser = await signUp(data);
+        // Set the user.
+        setUser(newUser);
+      }
 
-                // Set the user.
-                setUser(newUser);
-            }
+      if (type === "sign-in") {
+        // console.log("data", data);
+    
+        const response = await signIn ({
+          email: data.email,
+          password: data.password,
+        });
+     
+        // console.log('response',response);
+      
 
-            if (type === 'sign-in') {
-                // const response = await signIn({
-                //     email: data.email,
-                //     pssword: data.password,
-                // });
-
-                // if (response) router.push("/");
-            }
-
-
-        } catch (error) {
-            console.log(error);
-
-        } finally {
-            setIsLoading(false);
-        }
+        if (response) router.push("/");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   }; // End of onSubmit
 
 
