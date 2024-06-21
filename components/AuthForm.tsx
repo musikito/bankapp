@@ -44,9 +44,17 @@ const AuthForm = ({ type }: { type: string }) => {
         },
     });
 
+  /**
+   * Handles the form submission for the authentication form.
+   *
+   * If the form type is "sign-up", it calls the `signUp` function to create a new user and sets the user state.
+   * If the form type is "sign-in", it calls the `signIn` function with the email and password from the form data, and redirects the user to the home page if the sign-in is successful.
+   *
+   * @param data - The form data, which is validated using the `formSchema` Zod schema.
+   * @returns - A Promise that resolves when the form submission is complete.
+   */
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true);
-   
 
     try {
       // Sign Up with Appwrite & create plaid token
@@ -60,14 +68,13 @@ const AuthForm = ({ type }: { type: string }) => {
 
       if (type === "sign-in") {
         // console.log("data", data);
-    
-        const response = await signIn ({
+
+        const response = await signIn({
           email: data.email,
           password: data.password,
         });
-     
+
         // console.log('response',response);
-      
 
         if (response) router.push("/");
       }

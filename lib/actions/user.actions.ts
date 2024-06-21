@@ -13,9 +13,7 @@ import { parseStringify } from "../utils";
  * @returns A stringified JSON object representing the newly created session, or null if an error occurred.
  */
 export const signIn = async ({ email, password }: signInProps) => {
-  console.log("signin", email, password);
   
-
   try {
     // Create an account client
     const { account } = await createAdminClient();
@@ -80,6 +78,24 @@ export async function getLoggedInUser() {
     const user = await account.get();
     // Return the user
     return parseStringify(user);
+  } catch (error) {
+    return null;
+  }
+};
+
+
+
+/**
+ * Logs out the currently logged in user by deleting the current session.
+ * @returns {Promise<void>} A promise that resolves when the logout operation is complete.
+ */
+export const logoutAccount = async () => {
+  try {
+    const { account } = await createSessionClient();
+    // Delete the current session
+    cookies().delete("appwrite-session");
+
+    await account.deleteSession("current");
   } catch (error) {
     return null;
   }

@@ -7,7 +7,8 @@ import React from 'react'
 const Home = async () => {
   // const loggedIn = await getLoggedInUser();
 
-  const loggedIn = { firstName: 'JoseMiguel', lastName: "Marte", email: "tumusicalatina@gmail.com" };
+  // const loggedIn = { firstName: 'JoseMiguel', lastName: "Marte", email: "tumusicalatina@gmail.com" };
+  const loggedIn = await getLoggedInUser();
   return (
     <section className="home">
       <div className='home-content'>
@@ -15,7 +16,7 @@ const Home = async () => {
           <HeaderBox
             type="greeting"
             title="Welcome"
-            user={loggedIn?.firstName || "Guest"}
+            user={loggedIn?.name || "Guest"}
             subtext="Manage and budget your money"
           />
           <TotalBalanceBox

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { sidebarLinks } from '@/constants';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
+import Footer from './Footer';
 
 /**
  * The SideBar component renders a sidebar navigation section with a logo link.
@@ -53,8 +54,7 @@ const SideBar = ({ user }: SiderbarProps) => {
                 {/** TODO IMPLEMENT USER */}
                 USER
             </nav>
-            {/** TODO IMPLEMENT FOOTER */}
-            FOOTER
+            <Footer user={user} />
         </section>
     );
 };
