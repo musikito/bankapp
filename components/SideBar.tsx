@@ -51,8 +51,7 @@ const SideBar = ({ user }: SiderbarProps) => {
                         </Link>
                     );
                 })}
-                {/** TODO IMPLEMENT USER */}
-                USER
+               
             </nav>
             <Footer user={user} />
         </section>
